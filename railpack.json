@@ -1,22 +1,6 @@
 {
   "$schema": "https://schema.railpack.com",
   "provider": "python",
-  "caches": {
-    "nvautonet-weights": { "directory": "weights/nvautonet" }
-  },
-  "secrets": ["WEIGHTS_URL"],
-  "steps": {
-    "install": {
-      "commands": ["pip install -r requirements.txt"]
-    },
-    "weights": {
-      "inputs": [{ "step": "install" }],
-      "commands": [
-        "wget -q $WEIGHTS_URL -O /tmp/nvautonet.zip && unzip -q /tmp/nvautonet.zip -d weights/nvautonet/ts/ && rm /tmp/nvautonet.zip"
-      ],
-      "caches": ["nvautonet-weights"]
-    }
-  },
   "deploy": {
     "startCommand": "streamlit run app.py --server.port=8501 --server.address=0.0.0.0 --server.headless=true",
     "variables": {
